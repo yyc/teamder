@@ -8,7 +8,7 @@ class Auth {
   constructor(globals){
     // Requires db
     this.db = globals.db;
-    this.url = secrets.url;
+    globals.url = secrets.url;
     passport.use(Auth.strategy(globals.db));
     globals.passport = passport;
   }
