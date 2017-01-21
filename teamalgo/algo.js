@@ -73,11 +73,9 @@ function kruskal(n, edge_list, group_limit) {
 		var team_size = 0;
 		for (var j = 0; j < n; j++)
 			if (rep[j] == i)
-				teams[teams_count][team_size++] = j
-		document.write(teams[teams_count] + '<br/>')
+				teams[teams_count][team_size++] = j;
 		teams_count++;
 	}
-
 	return teams;
 }
 
