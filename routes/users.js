@@ -4,28 +4,34 @@ module.exports = function(globals){
   var db = globals.db;
 
   var router = express.Router();
-  router.get('/new', function(req, res, next){
-    res.render('new')
+  router.get('/join', globals.passport.authenticate('jwt', { session: false}),
+    function(req, res, next){
+      globals.auth.refreshCookie(res, req.user);
+      req.user.getProject()
+      .then(function(project){
+        res.render('join', {skill: [], project})
+      })
   });
 
   router.post('/new', function(req, res, next){
     var body = req.body
-    var inviteeList = body.email_list
+    var invitees = req.body.inviteEmails
+    var inviteeList = invitees.split(/[,\n ]+/)
 
     db.sequelize.transaction(function(transaction){
       return db.Project
       .create({
-        name: body.project_name,
-        description: body.project_desc,
-        numMembers: body.team_size,
+        name: body.projectName,
+        description: body.description,
+        numMembers: body.teamSize,
         ownerId: 0
       }, {transaction})
       .then(function(project) {
           var promiseArray = []
           promiseArray.push(
             db.User.create({
-              email: body.creator_email,
-              name: body.creator_name,
+              email: body.creatorEmail,
+              name: body.creatorName,
               projectId:project.id,
               isAdmin: true
             }, {transaction})
@@ -48,31 +54,31 @@ module.exports = function(globals){
           );
           return Promise
             .all(promiseArray)
-            .then((results) => Promise.resolve([project, results[0], results.slice(1)]));
+            .then(Promise.resolve([project, promiseArray[0], promiseArray.slice(1)]));
         })
     })
     .then(function(projAndUser){
       // If created
-      [project, inviter, inviteeList] = projAndUser
+      [project, inviter, invitees] = projAndUser
       // TODO: Send out emails to inviteeList and user(the inviter)
       // each user's token = globals.auth.jwtForUser(user)
+
       // Send inviter the email
       var subject = 'Project Allocation Session Created';
       var content = 'Hey there!\n\n, your project allocation session can be administered at [link]';
-      globals.Mail.sendMail(inviter.email, subject, content);
+      Mail.sendMail(inviter.email, subject, content);
       // Send each invitee an email
-      inviteeList.forEach(function(invitee){
-        console.log(invitee)
-        var token = globals.auth.jwtForUser(invitee);
+      invitees.forEach(function(invitee){
+        var token = globals.auth.jwtForUser(user);
         var sendLink = global.url + '/join?login=' + token;
         var subject = 'Invitation to Project Allocation Session';
         var content = 'Hey there!\n\nPlease proceed to ' + sendLink + 'in order to participate in the project allocation session.';
-        globals.Mail.sendMail(invitee.email, subject, content);
-        console.log("Sent mail to: " + invitee.email);
+        Mail.sendMail(invitee.email, subject, content);
+        console.log("Sent mail to: " + invite.email);
         // console.log
       })
       console.log("Project created");
-      globals.auth.refreshCookie(res, inviter);
+      res.cookie('jwt', globals.auth.jwtForUser(inviter), {secure: true, maxAge:99999999999});
       res.json("OK");
   });
 

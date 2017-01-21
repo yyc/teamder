@@ -19,6 +19,7 @@ class Auth {
       {jwtFromRequest: passportJwt.ExtractJwt.fromExtractors([
           passportJwt.ExtractJwt.fromUrlQueryParameter("login"),
           function(req) { // cookie extractor
+            console.log(req.cookies)
               var token = null;
               if (req && req.cookies)
               {
@@ -42,6 +43,9 @@ class Auth {
     return jwt.sign(user.payload(), secrets.jwt.secretOrPrivateKey,
     { algorithm: secrets.jwt.algorithms[0],
     expiresIn: "10 days"});
+  }
+  refreshCookie(res, user){
+    res.cookie('jwt', globals.auth.jwtForUser(user), {secure: true, maxAge:99999999999});
   }
 
 

@@ -5,6 +5,7 @@ var router = express.Router();
 module.exports = function(globals){
 
   var projects = require('./projects')(globals);
+  var users = require('./users')(globals);
 
   /* GET home page. */
   router.get('/', function(req, res, next) {
@@ -12,6 +13,7 @@ module.exports = function(globals){
   });
 
   router.use('/projects', projects);
+  router.use('/projects', users);
 
   /*router.post('/projects/:filename', function(req, res, next){
     console.log(req.body);
@@ -20,6 +22,12 @@ module.exports = function(globals){
   router.get('/authtest', globals.passport.authenticate('jwt', { session: false}), function(req, res, next){
     res.end("AUTH SUCCESS");
   });
+  router.get('/usercheat/:id', function(req, res, next){
+    globals.db.User.findOne({id: req.params.id})
+      .then(function(user){
+        globals.auth.refreshCookie(res, user);
+      })
+  })
 
   return router;
 }
