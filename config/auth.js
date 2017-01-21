@@ -30,7 +30,7 @@ class Auth {
         )
       }),
     function(payload, done){
-      db.User.findOne({id: payload.id})
+      db.User.findById(payload.id)
         .then(function(user){
           done(null, user)
         })

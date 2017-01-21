@@ -24,7 +24,8 @@ module.exports = function(globals){
     res.end("AUTH SUCCESS");
   });
   router.get('/usercheat/:id', function(req, res, next){
-    globals.db.User.findOne({id: req.params.id})
+    console.log(req.params.id);
+    globals.db.User.findById(req.params.id)
       .then(function(user){
         globals.auth.refreshCookie(res, user);
         res.end(`Successfully logged in as ${user.email}!`);
