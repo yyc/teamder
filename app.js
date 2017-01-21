@@ -5,10 +5,12 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var exphbs  = require('express-handlebars');
+var Auth = require('./config/auth');
 
 var db = require('./models')
 
 var globals = {db}
+var auth = new Auth(globals);
 
 var routes = require('./routes/index')(globals);
 
