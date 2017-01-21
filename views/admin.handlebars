@@ -1,0 +1,69 @@
+<div class="container">
+	<div class="row">
+
+		<section class="content">
+			<h1>Admin Page</h1>
+			<div class="col-md-8 col-md-offset-2">
+				<div class="panel panel-default">
+					<div class="panel-body">
+						<div class="pull-right">
+							<div class="btn-group">
+								<button type="button" class="btn btn-success btn-filter" data-target="completed">completed</button>
+								<button type="button" class="btn btn-danger btn-filter" data-target="incomplete">incomplete</button>
+							</div>
+						</div>
+						<div class="table-container">
+							<table class="table table-filter">
+								<tbody>
+									{{#each users}}
+									<tr data-status="
+									{{#if this.isCompleted}}
+										completed
+									{{else}}
+										incomplete
+									{{/if}}
+									">
+										<td>
+											<div class="media">
+												<div class="media-body">
+													<h4 class="title">
+														{{this.name}}
+														<span class="pull-right 
+														{{#if this.isCompleted}}
+															completed
+														{{else}}
+															incomplete
+														{{/if}}
+														">
+															{{#if this.isCompleted}}
+																completed
+															{{else}}
+																incomplete
+															{{/if}}
+														</span>
+													</h4>
+													<p class="summary">{{this.email}}</p>
+												</div>
+											</div>
+										</td>
+									</tr>
+									{{/each}}
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+				<div class="content-footer">
+					<p>
+					{{#if isAllCompleted }}
+						Everyone has completed! Generate team allocation <a href="groupings">here</a>!
+					{{else}}
+						Waiting for everyone to complete. Chill...
+					{{/if}}
+					</p>
+				</div>
+			</div>
+		</section>
+		
+	</div>
+</div>
