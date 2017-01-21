@@ -140,7 +140,7 @@ $(document).ready(function() {
         // Send AJAX request to join
         $.ajax({
             type: 'POST',
-            url: '/join',
+            url: '/projects/join',
             contentType: 'application/json',
             data: JSON.stringify({
                 'joiner_name': joinerName,
