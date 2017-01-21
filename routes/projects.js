@@ -1,5 +1,4 @@
 var express = require('express');
-var passport = require('passport');
 
 module.exports = function(db){
   var router = express.Router();
