@@ -16,9 +16,19 @@ class Auth {
     return new passportJwt.Strategy(
       Object.assign({},
       secrets.jwt,
-      {jwtFromRequest: passportJwt.ExtractJwt.fromUrlQueryParameter("login")}
-      )
-    , function(payload, done){
+      {jwtFromRequest: passportJwt.ExtractJwt.fromExtractors([
+          passportJwt.ExtractJwt.fromUrlQueryParameter("login"),
+          function(req) { // cookie extractor
+              var token = null;
+              if (req && req.cookies)
+              {
+                  token = req.cookies['jwt'];
+              }
+              return token;
+          }]
+        )
+      }),
+    function(payload, done){
       db.User.findOne({id: payload.id})
         .then(function(user){
           done(null, user)
