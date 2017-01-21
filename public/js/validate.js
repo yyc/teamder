@@ -141,11 +141,12 @@ $(document).ready(function() {
         $.ajax({
             type: 'POST',
             url: '/join',
-            data: {
+            contentType: 'application/json',
+            data: JSON.stringify({
                 'joiner_name': joinerName,
                 'joiner_about': joinerAbout,
                 'joiner_skills': joinerSkills
-            },
+            }),
             success: function(msg) {
                 $('#create_error').css({'display' : 'none'});
             }
