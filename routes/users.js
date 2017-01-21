@@ -17,19 +17,21 @@ module.exports = function(globals){
     req.user.update({
       name: req.body.joiner_name,
       description: req.body.joiner_about,
-      proficiencies: JSON.Stringify(req.body.joiner_skills)
+      proficiencies: JSON.stringify(req.body.joiner_skills)
     })
     .then(function(){
       console.log("User updated");
-      globals.auth.refreshCookie(res, req.user);
+      globals.auth.refreshCookie(res , req.user);
       res.json("OK");
     })
   });
 
   router.get('/admin', function(req, res, next){
-    console.log(req.user.dataValues);
     if(req.user.isAdmin){
-      res.render('admin', {})
+      req.user.getProject()
+      .then(function(project){
+        res.render('admin', {project})
+      });
     } else{
       res.status(401);
       res.render("error", {error: "Unauthorized"});
@@ -37,6 +39,14 @@ module.exports = function(globals){
   });
 
   router.get('/match', function(req, res, next){
+    if(req.user.isAdmin){
+      res.render("error", {error: "Overauthorized"});
+    } else{
+      req.user.getProject()
+      .then(function(project){
+        res.render('match', {project});
+      })
+    }
   });
 
   return router
