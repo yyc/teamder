@@ -8,18 +8,18 @@ class Auth {
   constructor(globals){
     // Requires db
     this.db = globals.db;
-    passport.use(Auth.strategy());
+    this.url = secrets.url;
+    passport.use(Auth.strategy(globals.db));
     globals.passport = passport;
   }
-  static strategy(){
-    var self = this;
+  static strategy(db){
     return new passportJwt.Strategy(
       Object.assign({},
       secrets.jwt,
       {jwtFromRequest: passportJwt.ExtractJwt.fromUrlQueryParameter("login")}
       )
     , function(payload, done){
-      self.User.findOne({id: payload.id})
+      db.User.findOne({id: payload.id})
         .then(function(user){
           done(null, user)
         })
