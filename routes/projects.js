@@ -9,11 +9,9 @@ module.exports = function(globals){
   });
 
   router.post('/new', function(req, res, next){
-    alert("A");
     var body = req.body
     var invitees = req.body.inviteEmails
     var inviteeList = invitees.split(/[,\n ]+/)
-    res.send("test");
 
     db.sequelize.transaction(function(transaction){
       return db.Project
@@ -51,13 +49,20 @@ module.exports = function(globals){
           );
           return Promise
             .all(promiseArray)
-            .then(Promise.resolve([project, promiseArray[0]]));
+            .then(Promise.resolve([project, promiseArray[0], promiseArray.slice(1)]));
         })
     })
     .then(function(projAndUser){
-      [project, user] = projAndUser
+      // If created
+      [project, inviter, invitees] = projAndUser
+      // TODO: Send out emails to inviteeList and user(the inviter)
+      // each user's token = globals.auth.jwtForUser(user)
+      invitees.forEach(function(invitee){
+        // send link = global.url + '/join?login=' + token
+        // console.log
+      })
       console.log("Project created");
-      res.cookie('jwt', globals.auth.jwtForUser(user), {secure: true, maxAge:99999999999});
+      res.cookie('jwt', globals.auth.jwtForUser(inviter), {secure: true, maxAge:99999999999});
       res.json("OK");
   });
 

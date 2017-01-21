@@ -6,16 +6,22 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var exphbs  = require('express-handlebars');
 var Auth = require('./config/auth');
+var Mail = require('./config/mail');
 
 var db = require('./models')
 
 var globals = {db}
 var auth = new Auth(globals);
 globals.auth = auth;
+var mail = new Mail(globals);
+globals.mail = mail;
 
 var routes = require('./routes/index')(globals);
 
 var app = express();
+
+
+app.use(globals.passport.initialize());
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));

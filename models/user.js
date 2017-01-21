@@ -9,7 +9,7 @@ module.exports = function(sequelize, DataTypes) {
   }, {
     classMethods: {
       associate: function(models) {
-        this.belongsTo(models.Project)
+        this.belongsTo(models.Project, {foreignKey: 'projectId'})
       }
     },
     instanceMethods: {
