@@ -5,7 +5,7 @@ module.exports = function(globals){
 
   var router = express.Router();
   router.get('/new', function(req, res, next){
-    res.render('projects/new')
+    res.render('new')
   });
 
   router.post('/new', function(req, res, next){
