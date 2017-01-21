@@ -73,7 +73,7 @@ module.exports = function(globals){
         // console.log
       })
       console.log("Project created");
-      res.cookie('jwt', globals.auth.jwtForUser(inviter), {secure: true, maxAge:99999999999});
+      globals.Auth.refreshCookie(res, inviter);
       res.json("OK");
   });
 
