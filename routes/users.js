@@ -13,16 +13,18 @@ module.exports = function(globals){
   });
 
   router.post('/join', function(req, res, next){
-    var body = req.body
+    var body = req.body;
     req.user.update({
       name: req.body.joiner_name,
       description: req.body.joiner_about,
-      proficiencies: JSON.Stringify(req.body.joiner_skills)
+      proficiencies: JSON.stringify(req.body.joiner_skills)
     })
     .then(function(){
       console.log("User updated");
       globals.auth.refreshCookie(res, req.user);
       res.json("OK");
+  }).error(function(msg) {
+      console.log(msg)
   })
   });
 
