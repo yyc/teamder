@@ -161,6 +161,8 @@ $(document).ready(function() {
             success: function(msg) {
                 $('#create_error').css({'display' : 'none'});
             }
+        }).done(function(data) {
+            window.location.href = '/';
         });
 
         $('#create_error').css({'display' : 'none'});

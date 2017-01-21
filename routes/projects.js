@@ -69,7 +69,7 @@ module.exports = function(globals){
       // Send each invitee an email
       inviteeList.forEach(function(invitee){
         var token = globals.auth.jwtForUser(invitee);
-        var sendLink = globals.url + '/project/join?login=' + token;
+        var sendLink = globals.url + '/projects/join?login=' + token;
         var subject = 'Invitation to Project Allocation Session';
         var content = 'Hey there!\n\nPlease proceed to ' + sendLink + 'in order to participate in the project allocation session.\n\nCheers,\nThe Teamder Team';
         globals.Mail.sendMail(invitee.email, subject, content);

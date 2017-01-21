@@ -23,7 +23,7 @@ module.exports = function(globals){
       console.log("User updated");
       globals.auth.refreshCookie(res, req.user);
       res.json("OK");
-    })
+  })
   });
 
   return router
