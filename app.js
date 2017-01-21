@@ -11,6 +11,7 @@ var db = require('./models')
 
 var globals = {db}
 var auth = new Auth(globals);
+globals.auth = auth;
 
 var routes = require('./routes/index')(globals);
 

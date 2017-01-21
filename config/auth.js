@@ -29,11 +29,9 @@ class Auth {
     });
   }
   jwtForUser(user){
-    return jwt.sign(user.payload(), secrets.jwt.privateKey,
-    Object.assign({},
-      secrets.jwt,
-      options
-    ));
+    return jwt.sign(user.payload(), secrets.jwt.secretOrPrivateKey,
+    { algorithm: secrets.jwt.algorithms[0],
+    expiresIn: "10 days"});
   }
 
 
