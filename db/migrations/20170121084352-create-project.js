@@ -9,10 +9,12 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       isComplete: {
-        type: Sequelize.BOOLEAN
+        type: Sequelize.BOOLEAN,
+        defaultValue: false
       },
       owner: {
-        type: Sequelize.USER
+        type: Sequelize.INTEGER,
+        allowNull: false
       },
       name: {
         type: Sequelize.STRING
