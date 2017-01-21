@@ -1,6 +1,8 @@
 var express = require('express');
 
-module.exports = function(db){
+module.exports = function(globals){
+  var db = globals.db;
+  
   var router = express.Router();
   router.get('/new', function(req, res, next){
     res.render('projects/new')

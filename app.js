@@ -7,7 +7,10 @@ var bodyParser = require('body-parser');
 var exphbs  = require('express-handlebars');
 
 var db = require('./models')
-var routes = require('./routes/index')(db);
+
+var globals = {db}
+
+var routes = require('./routes/index')(globals);
 
 var app = express();
 

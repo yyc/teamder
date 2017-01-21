@@ -2,9 +2,9 @@ var express = require('express');
 var router = express.Router();
 
 
-module.exports = function(db){
+module.exports = function(globals){
 
-  var projects = require('./projects')(db);
+  var projects = require('./projects')(globals);
 
   /* GET home page. */
   router.get('/', function(req, res, next) {
