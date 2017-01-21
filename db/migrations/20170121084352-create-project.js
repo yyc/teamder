@@ -12,14 +12,14 @@ module.exports = {
         type: Sequelize.BOOLEAN,
         defaultValue: false
       },
-      owner: {
+      ownerId: {
         type: Sequelize.INTEGER,
         allowNull: false
       },
       name: {
         type: Sequelize.STRING
       },
-      members: {
+      numMembers: {
         type: Sequelize.INTEGER
       },
       description: {
