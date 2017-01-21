@@ -10,23 +10,24 @@ module.exports = function(globals){
 
   router.post('/new', function(req, res, next){
     var body = req.body
-    var invitees = req.body.inviteEmails
+    var invitees = body.emails
+    console.log(body.emails)
     var inviteeList = invitees.split(/[,\n ]+/)
 
     db.sequelize.transaction(function(transaction){
       return db.Project
       .create({
-        name: body.projectName,
-        description: body.description,
-        numMembers: body.teamSize,
+        name: body.project_name,
+        description: body.project_desc,
+        numMembers: body.team_size,
         ownerId: 0
       }, {transaction})
       .then(function(project) {
           var promiseArray = []
           promiseArray.push(
             db.User.create({
-              email: body.creatorEmail,
-              name: body.creatorName,
+              email: body.creator_email,
+              name: body.creator_name,
               projectId:project.id,
               isAdmin: true
             }, {transaction})
