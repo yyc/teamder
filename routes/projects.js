@@ -1,4 +1,5 @@
 var express = require('express');
+var passport = require('passport');
 
 module.exports = function(db){
   var router = express.Router();
@@ -23,8 +24,8 @@ module.exports = function(db){
           promiseArray.push(
             db.User.create({
               email: body.creatorEmail,
-              name: body.creatorPassword,
-              project,
+              name: body.creatorName,
+              projectId:project.id,
               isAdmin: true
             }, {transaction})
             .then(function(user){
@@ -38,11 +39,11 @@ module.exports = function(db){
             .map(function(email){
               return db.User.create({
                 email: email,
-                project,
+                projectId: project.id,
                 isAdmin: false
               }, {transaction})
             })
-          )
+          );
           return Promise
             .all(promiseArray)
             .then(Promise.resolve(project));
@@ -50,7 +51,7 @@ module.exports = function(db){
     })
     .then(function(project){
       console.log("Project created");
-      res.render('projects/created', {details: body.toJSON()});
+      res.json("OK");
     })
   })
   return router
