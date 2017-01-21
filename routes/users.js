@@ -15,12 +15,12 @@ module.exports = function(globals){
   router.post('/join', function(req, res, next){
     var body = req.body
     req.user.update({
-      name: joinerName,
-      description: joinerAbout
+      name: req.body.joinerName,
+      description: req.body.joinerAbout
     })
     .then(function(){
       console.log("User updated");
-      globals.auth.refreshCookie(res, inviter);
+      globals.auth.refreshCookie(res, req.user);
       res.json("OK");
     })
   });
