@@ -7,7 +7,7 @@ var projects = require('./projects');
 router.get('/', function(req, res, next) {
   res.render('index', { title: 'Express' });
 });
-router.use('projects', projects)
+router.use('/', projects)
 
 router.get('/viewtest/:filename', function(req, res, next){
   res.render(req.params.filename, {});
