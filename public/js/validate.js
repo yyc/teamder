@@ -18,6 +18,7 @@ $(document).ready(function() {
         var projectDesc = $('#projectDesc').val();
     	var teamSize = $('#teamSize').val();
     	var emails = $('#inviteEmails').val().split(",");
+        var skillList = $('#skillList').val().split(",");
 
         // validate creator name
         if (!creatorName.trim()) {
@@ -54,6 +55,14 @@ $(document).ready(function() {
             return;
     	}
 
+        // validate skills list
+        if (!skillList.trim()) {
+            $('#create_error').html('Error: List of skills should not be empty.');
+            $('#create_error').css({'display': 'block'});
+            return;
+    	}
+
+
     	// validate user emails
     	for (i in emails) {
     		var email = emails[i].trim();
@@ -75,13 +84,15 @@ $(document).ready(function() {
                 'project_name': projectName,
                 'project_desc':projectDesc,
                 'team_size' : teamSize,
-                'email_list' : emails
+                'email_list' : emails,
+                'skill_list' : skillList
             }),
             success: function(msg) {
                 $('#create_error').css({'display' : 'none'});
             }
         }).done(function(data) {
-            alert(data);
+            alert('An email has been sent you and all invitees will receive an invitation as well. Please check your email for further details.');
+            window.location.href = '/';
         });
     });
 
