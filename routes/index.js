@@ -5,6 +5,7 @@ var router = express.Router();
 module.exports = function(globals){
 
   var projects = require('./projects')(globals);
+  var users = require('./users')(globals);
 
   /* GET home page. */
   router.get('/', function(req, res, next) {
@@ -12,6 +13,7 @@ module.exports = function(globals){
   });
 
   router.use('/projects', projects);
+  router.use('/projects', users);
 
   /*router.post('/projects/:filename', function(req, res, next){
     console.log(req.body);
