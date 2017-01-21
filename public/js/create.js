@@ -62,6 +62,8 @@ $(document).ready(function() {
             type: 'POST',
             url: '/projects',
             data: {
+                'creator_name': creatorName,
+                'creator_email': creatorEmail,
                 'project_name': projectName,
                 'team_size' : teamSize,
                 'emails' : emails
