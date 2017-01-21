@@ -34,6 +34,7 @@ module.exports = function(globals){
             }, {transaction})
             .then(function(user){
               return project.setOwner(user, {transaction})
+                            .then(Promise.resolve(user));
             })
           );
           promiseArray = promiseArray.concat(
@@ -50,11 +51,13 @@ module.exports = function(globals){
           );
           return Promise
             .all(promiseArray)
-            .then(Promise.resolve(project));
+            .then(Promise.resolve([project, promiseArray[0]]));
         })
     })
-    .then(function(project){
+    .then(function(projAndUser){
+      [project, user] = projAndUser
       console.log("Project created");
+      res.cookie('jwt', globals.auth.jwtForUser(user), {secure: true, maxAge:99999999999});
       res.json("OK");
   });
 
