@@ -40,7 +40,6 @@ class Auth {
     });
   }
   jwtForUser(user){
-    console.log(user);
     return jwt.sign(user.payload(), secrets.jwt.secretOrPrivateKey,
     { algorithm: secrets.jwt.algorithms[0],
     expiresIn: "10 days"});
