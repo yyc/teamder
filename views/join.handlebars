@@ -8,6 +8,14 @@
 
 <form class="form-horizontal">
 
+  <h1> Join {{project.name}}! </h1>
+  <!-- Joiner Name -->
+    <div class="form-group">
+      <label class="col-md-4 control-label" for="email">Your email address:</label>
+      <div class="col-md-4">
+        <input id="joinerName" type="text" class="form-control input-md" value="{{email}}" readonly="readonly">
+      </div>
+    </div>
 	<!-- Joiner Name -->
     <div class="form-group">
       <label class="col-md-4 control-label" for="joinerName">Your name:</label>
@@ -26,10 +34,11 @@
 
 	<!-- Skills of Interest -->
 	<div class="form-group">
-	  <label class="col-md-4 control-label" for="joinerSkills"> Skills of Interest: <br> (10 = most proficient) </label>
-	  <div class="col-md-4">
-		  <div class="form-group">
-
+    {{#if skills}}
+  	  <label class="col-md-4 control-label" for="joinerSkills"> Skills of Interest: <br> (10 = most proficient) </label>
+  	  <div class="col-md-4">
+  		  <div class="form-group">
+    {{/if}}
 		  {{#each skill}}
 
 		  <label class="col-md-4 control-label" for="joinerSkill{{@index}}"> {{this}} </label>

@@ -9,11 +9,11 @@ module.exports = function(globals){
       globals.auth.refreshCookie(res, req.user);
       req.user.getProject()
       .then(function(project){
-        res.render('join', {skill: [], project})
+        res.render('join', {skill: [], project, email: req.user.email})
       })
   });
 
-  router.post('/new', function(req, res, next){
+  router.post('/join', function(req, res, next){
     var body = req.body
     var invitees = req.body.inviteEmails
     var inviteeList = invitees.split(/[,\n ]+/)

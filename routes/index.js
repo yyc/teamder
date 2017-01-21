@@ -26,6 +26,7 @@ module.exports = function(globals){
     globals.db.User.findOne({id: req.params.id})
       .then(function(user){
         globals.auth.refreshCookie(res, user);
+        res.end(`Successfully logged in as ${user.email}!`);
       })
   })
 
