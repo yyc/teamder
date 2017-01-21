@@ -10,13 +10,14 @@ module.exports = function(db){
   router.get('/', function(req, res, next) {
     res.render('index', { title: 'Express' });
   });
-  router.use('/', projects)
+  router.use(projects)
 
   router.get('/viewtest/:filename', function(req, res, next){
     res.render(req.params.filename, {});
   })
   router.post('/viewtest/:filename', function(req, res, next){
-    res.render(req.params.filename, req.params.body);
+    console.log(req.body);
+    res.render(req.params.filename, req.body);
   })
 
   return router;
