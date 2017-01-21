@@ -70,6 +70,7 @@ module.exports = function(globals){
         var content = 'Hey there!\n\nPlease proceed to ' + sendLink + 'in order to participate in the project allocation session.';
         Mail.sendMail(invitee.email, subject, content);
         console.log("Sent mail to: " + invite.email);
+        // console.log
       })
       console.log("Project created");
       res.cookie('jwt', globals.auth.jwtForUser(inviter), {secure: true, maxAge:99999999999});

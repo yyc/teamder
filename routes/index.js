@@ -10,15 +10,8 @@ module.exports = function(globals){
   router.get('/', function(req, res, next) {
     res.render('index', { title: 'Express' });
   });
-  router.use(projects)
+  router.use('/projects', projects)
 
-  router.get('/projects/:filename', function(req, res, next){
-    res.render(req.params.filename, {});
-  })
-  /*router.post('/projects/:filename', function(req, res, next){
-    console.log(req.body);
-    res.render(req.params.filename, req.body);
-})*/
   router.get('/authtest', globals.passport.authenticate('jwt', { session: false}), function(req, res, next){
     res.end("AUTH SUCCESS");
   });
