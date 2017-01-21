@@ -3,7 +3,6 @@ $(document).ready(function() {
 
     	// extract values
     	var projectName = $('#projectName').val();
-    	var numTeams = $('#numTeams').val();
     	var teamSize = $('#numTeams').val();
     	var emails = $('#inviteEmails').val().split(",");
 
@@ -12,8 +11,9 @@ $(document).ready(function() {
     		alert("Project name required!");
 		}
 
-    	if (Math.abs(emails.length - (numTeams * teamSize)) > numTeams/2) {
-    		alert("Number of emails does not match with number of teams and size.");
+
+        if (teamSize <= 0) {
+    		alert("Invalid team size.");
     		return;
     	}
 
@@ -30,8 +30,17 @@ $(document).ready(function() {
     	// send email
 
     	// create project in backend
-
-    	window.location.href = "status.html";
-    	
+        $.ajax({
+            type: 'POST',
+            url: '/projects',
+            data: {
+                'project_name': projectName,
+                'team_size' : teamSize,
+                'emails' : emails
+            },
+            success: function(msg) {
+                window.location.href = status.html;
+            }
+        });
     });
 });
