@@ -26,5 +26,18 @@ module.exports = function(globals){
     })
   });
 
+  router.get('/admin', function(req, res, next){
+    console.log(req.user.dataValues);
+    if(req.user.isAdmin){
+      res.render('admin', {})
+    } else{
+      res.status(401);
+      res.render("error", {error: "Unauthorized"});
+    }
+  });
+
+  router.get('/match', function(req, res, next){
+  });
+
   return router
 }
