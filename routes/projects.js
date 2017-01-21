@@ -31,7 +31,7 @@ module.exports = function(globals){
             }, {transaction})
             .then(function(user){
               return project.setOwner(user, {transaction})
-                            .then(Promise.resolve(user));
+                            .then((proj) => Promise.resolve(user));
             })
           );
           promiseArray = promiseArray.concat(
@@ -48,12 +48,17 @@ module.exports = function(globals){
           );
           return Promise
             .all(promiseArray)
-            .then((results) => Promise.resolve([project, results[0], results.slice(1)]));
+            .then((results) => Promise.resolve({
+              project,
+              inviter: results[0],
+              invitees: results.slice(1)}));
         })
     })
     .then(function(projAndUser){
       // If created
-      [project, inviter, inviteeList] = projAndUser
+      var project = projAndUser.project;
+      var inviter = projAndUser.inviter;
+      var inviteeList = projAndUser.invitees;
       // TODO: Send out emails to inviteeList and user(the inviter)
       // each user's token = globals.auth.jwtForUser(user)
       // Send inviter the email
