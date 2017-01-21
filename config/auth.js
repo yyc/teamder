@@ -5,22 +5,21 @@ var secrets = require('./secrets');
 var jwt = require('jsonwebtoken');
 
 class Auth {
-  constructor(db){
+  constructor(globals){
     // Requires db
-    this.globals = globals;
-    db.User.prototype.payload = function(){
-      return {
-        id: this.id,
-        projectId: this.projectId
-      }
-    }
+    this.db = globals.db;
+    passport.use(Auth.strategy());
+    globals.passport = passport;
   }
-  strategy(){
-    return new passportJwt.Strategy({
-      ...secrets.jwt,
-      jwtFromRequest: passportJwt.ExtractJwt.fromUrlQueryParameter("login")
-    }, function(payload, done){
-      User.findOne({id: payload.id})
+  static strategy(){
+    var self = this;
+    return new passportJwt.Strategy(
+      Object.assign({},
+      secrets.jwt,
+      {jwtFromRequest: passportJwt.ExtractJwt.fromUrlQueryParameter("login")}
+      )
+    , function(payload, done){
+      self.User.findOne({id: payload.id})
         .then(function(user){
           done(null, user)
         })
@@ -31,8 +30,10 @@ class Auth {
   }
   jwtForUser(user){
     return jwt.sign(user.payload(), secrets.jwt.privateKey,
-    {...secrets.jwt,
-    options});
+    Object.assign({},
+      secrets.jwt,
+      options
+    ));
   }
 
 

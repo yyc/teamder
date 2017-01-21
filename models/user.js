@@ -11,6 +11,14 @@ module.exports = function(sequelize, DataTypes) {
       associate: function(models) {
         this.belongsTo(models.Project)
       }
+    },
+    instanceMethods: {
+      payload: function(){
+        return {
+          id: this.id,
+          projectId: this.projectId
+        }
+      }
     }
   });
   return User;
