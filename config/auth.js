@@ -45,7 +45,7 @@ class Auth {
     expiresIn: "10 days"});
   }
   refreshCookie(res, user){
-    res.cookie('jwt', globals.auth.jwtForUser(user), {secure: true, maxAge:99999999999});
+    res.cookie('jwt', this.jwtForUser(user), {secure: false, maxAge:99999999999});
   }
 
 
