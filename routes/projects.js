@@ -2,16 +2,19 @@ var express = require('express');
 
 module.exports = function(globals){
   var db = globals.db;
-  
+
   var router = express.Router();
   router.get('/new', function(req, res, next){
     res.render('projects/new')
   });
 
   router.post('/new', function(req, res, next){
+    alert("A");
     var body = req.body
     var invitees = req.body.inviteEmails
     var inviteeList = invitees.split(/[,\n ]+/)
+    res.send("test");
+
     db.sequelize.transaction(function(transaction){
       return db.Project
       .create({
@@ -53,7 +56,9 @@ module.exports = function(globals){
     .then(function(project){
       console.log("Project created");
       res.json("OK");
-    })
-  })
+  });
+
+  });
+
   return router
 }

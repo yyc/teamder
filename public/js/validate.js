@@ -59,7 +59,7 @@ $(document).ready(function() {
         // Send AJAX request with information
         $.ajax({
             type: 'POST',
-            url: '/projects',
+            url: '/projects/new',
             data: {
                 'creator_name': creatorName,
                 'creator_email': creatorEmail,
@@ -70,6 +70,8 @@ $(document).ready(function() {
             success: function(msg) {
                 $('#create_error').css({'display' : 'none'});
             }
+        }).done(function(data) {
+            alert(data);
         });
     });
 
@@ -77,7 +79,7 @@ $(document).ready(function() {
         var slider = $('.range-slider'),
             range = $('.range-slider__range'),
             value = $('.range-slider__value');
-    
+
         slider.each(function(){
 
           value.each(function(){

@@ -12,13 +12,13 @@ module.exports = function(globals){
   });
   router.use(projects)
 
-  router.get('/viewtest/:filename', function(req, res, next){
+  router.get('/projects/:filename', function(req, res, next){
     res.render(req.params.filename, {});
   })
-  router.post('/viewtest/:filename', function(req, res, next){
+  /*router.post('/projects/:filename', function(req, res, next){
     console.log(req.body);
     res.render(req.params.filename, req.body);
-  })
+})*/
 
   return router;
 }
