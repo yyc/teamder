@@ -35,8 +35,8 @@ $(document).ready(function() {
             url: '/projects',
             data: {
                 'project_name': projectName,
-                'team_size', : teamSize,
-                'emails', emails
+                'team_size' : teamSize,
+                'emails' : emails
             },
             success: function(msg) {
                 window.location.href = status.html;
