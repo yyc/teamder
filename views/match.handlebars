@@ -1,0 +1,35 @@
+<div class='container-fluid'>
+    <div class='row'>
+        <div id='create_error' class='col-md-4 col-md-offset-4'></div>
+    </div>
+</div>
+
+<br/>
+
+<form class='form-horizontal'>
+	<div class='container-fluid' id='match-container'>
+	{{#each people}}
+			<div class='row'>
+				<div class='col-md-2 col-md-offset-1' id='matchPersonName{{this.id}}'>
+					<b> {{this.name}} </b>
+				</div>
+				<div class='col-md-6' id='matchPersonAbout{{this.id}}'>
+					{{this.about}}
+				</div>
+				<div class='col-md-2'>
+					<input id="matchPersonVote{{this.id}}" name="matchPersonVote{{this.id}}" type="checkbox" class="form-control input-md" value='{{this.id}}'/> Preferred
+				</div>
+			</div>
+	{{/each}}
+
+		<input id="matchNumPersons" name="matchNumPersons" type="hidden" class="form-control input-md" value='{{people.length}}'/>
+		<!-- Button -->
+		<div class="form-group">
+		  <label class="col-md-4 control-label" for="submitMatch"></label>
+		  <div class="col-md-4">
+			<button id="submitMatch" name="submitMatch" class="btn btn-primary" type="button">Enter Preference</button>
+			<button class="btn btn-danger" type="reset">Reset</button>
+		  </div>
+		</div>
+	</div>
+</form>

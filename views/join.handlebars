@@ -16,7 +16,7 @@
       </div>
     </div>
 
-	<!-- Skills -->
+	<!-- About -->
 	<div class="form-group">
       <label class="col-md-4 control-label" for="joinerAbout"> About Yourself <br/> (Skills / Interests etc.): </label>
       <div class="col-md-4">
@@ -24,25 +24,22 @@
       </div>
     </div>
 
-	<!-- Skills of Interest -->>
+	<!-- Skills of Interest -->
 	<div class="form-group">
 	  <label class="col-md-4 control-label" for="joinerSkills"> Skills of Interest: <br> (10 = most proficient) </label>
 	  <div class="col-md-4">
 		  <div class="form-group">
 
-		  <!-- Please dynamically generate the joinerSkills0 to joinerSkills[n] -->
-  		  <label class="col-md-4 control-label" for="joinerSkill0"> C++: </label>
+		  {{#each skill}}
+
+		  <label class="col-md-4 control-label" for="joinerSkill{{@index}}"> {{this}} </label>
   		  <div class="col-md-8">
-  			<input id="joinerSkill0" name="joinerSkill0" type="text" placeholder="Rate yourself (1 - 10)" class="form-control input-md">
+  			<input id="joinerSkill{{@index}}" name="joinerSkill{{@index}}" type="text" placeholder="Rate yourself (1 - 10)" class="form-control input-md">
   		  </div>
 
-		  <label class="col-md-4 control-label" for="joinerSkill1"> Java: </label>
-  		  <div class="col-md-8">
-  			<input id="joinerSkill1" name="joinerSkill1" type="text" placeholder="Rate yourself (1 - 10)" class="form-control input-md">
-  		  </div>
+		  {{/each}}
 
-		  <!-- Edit number of skills to be dynamic -->
-		  <input id="joinerNumSkills" name="joinerNumSkills" type="hidden" class="form-control input-md" value="2">
+		  <input id="joinerNumSkills" name="joinerNumSkills" type="hidden" class="form-control input-md" value="{{skill.length}}">
   		</div>
 	  </div>
 	</div>

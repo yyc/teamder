@@ -107,7 +107,7 @@ $(document).ready(function() {
         // Send AJAX request to join
         $.ajax({
             type: 'POST',
-            url: '/projects',
+            url: '/join',
             data: {
                 'joiner_name': joinerName,
                 'joiner_about': joinerAbout,
@@ -119,5 +119,29 @@ $(document).ready(function() {
         });
 
         $('#create_error').css({'display' : 'none'});
+    });
+
+    $('#submitMatch').click(function(e){
+        var matchNumPersons = $('#matchNumPersons').val();
+        var matchedPeople = new Array();
+        var matchedCount = 0;
+        $('#match-container input:checked').each(function() {
+           matchedPeople[matchedCount++] = this.value;
+       });
+
+       // do we need to put a restriction on number of people?
+
+       // Send AJAX request to join
+       $.ajax({
+           type: 'POST',
+           url: '/match',
+           data: {
+               'matched_people':matchedPeople
+           },
+           success: function(msg) {
+               $('#create_error').css({'display' : 'none'});
+           }
+       });
+
     });
 });
