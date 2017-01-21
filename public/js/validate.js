@@ -15,6 +15,7 @@ $(document).ready(function() {
     	var creatorName = $('#creatorName').val();
         var creatorEmail = $('#creatorEmail').val();
         var projectName = $('#projectName').val();
+        var projectDesc = $('#projectDesc').val();
     	var teamSize = $('#teamSize').val();
     	var emails = $('#inviteEmails').val().split(",");
 
@@ -35,6 +36,13 @@ $(document).ready(function() {
     	// validate project name
     	if (!projectName.trim()) {
             $('#create_error').html('Error: Project name is required.');
+            $('#create_error').css({'display': 'block'});
+            return;
+		}
+
+        // validate project description
+    	if (!projectDesc.trim()) {
+            $('#create_error').html('Error: Project description is required.');
             $('#create_error').css({'display': 'block'});
             return;
 		}
@@ -60,13 +68,15 @@ $(document).ready(function() {
         $.ajax({
             type: 'POST',
             url: '/projects/new',
-            data: {
+            contentType: 'application/json',
+            data: JSON.stringify({
                 'creator_name': creatorName,
                 'creator_email': creatorEmail,
                 'project_name': projectName,
+                'project_desc':projectDesc,
                 'team_size' : teamSize,
-                'emails' : emails
-            },
+                'email_list' : emails
+            }),
             success: function(msg) {
                 $('#create_error').css({'display' : 'none'});
             }
