@@ -1,0 +1,60 @@
+<div class='container-fluid'>
+    <div class='row'>
+        <div id='create_error' class='col-md-4 col-md-offset-4'></div>
+    </div>
+</div>
+
+<br/>
+
+<form class="form-horizontal">
+
+	<!-- Joiner Name -->
+    <div class="form-group">
+      <label class="col-md-4 control-label" for="joinerName">Your name:</label>
+      <div class="col-md-4">
+        <input id="joinerName" name="joinerName" type="text" placeholder="Enter your name" class="form-control input-md">
+      </div>
+    </div>
+
+	<!-- Skills -->
+	<div class="form-group">
+      <label class="col-md-4 control-label" for="joinerAbout"> About Yourself <br/> (Skills / Interests etc.): </label>
+      <div class="col-md-4">
+        <textarea class="form-control" id="joinerAbout" name="joinerAbout" placeholder="Tell everyone more about yourself! (140 characters max.)"></textarea>
+      </div>
+    </div>
+
+	<!-- Skills of Interest -->>
+	<div class="form-group">
+	  <label class="col-md-4 control-label" for="joinerSkills"> Skills of Interest: <br> (10 = most proficient) </label>
+	  <div class="col-md-4">
+		  <div class="form-group">
+
+		  <!-- Please dynamically generate the joinerSkills0 to joinerSkills[n] -->
+  		  <label class="col-md-4 control-label" for="joinerSkill0"> C++: </label>
+  		  <div class="col-md-8">
+  			<input id="joinerSkill0" name="joinerSkill0" type="text" placeholder="Rate yourself (1 - 10)" class="form-control input-md">
+  		  </div>
+
+		  <label class="col-md-4 control-label" for="joinerSkill1"> Java: </label>
+  		  <div class="col-md-8">
+  			<input id="joinerSkill1" name="joinerSkill1" type="text" placeholder="Rate yourself (1 - 10)" class="form-control input-md">
+  		  </div>
+
+		  <!-- Edit number of skills to be dynamic -->
+		  <input id="joinerNumSkills" name="joinerNumSkills" type="hidden" class="form-control input-md" value="2">
+  		</div>
+	  </div>
+	</div>
+
+
+	<!-- Button -->
+    <div class="form-group">
+      <label class="col-md-4 control-label" for="submitJoin"></label>
+      <div class="col-md-4">
+        <button id="submitJoin" name="submitJoin" class="btn btn-primary" type="button">Join Project Allocation </button>
+		<button class="btn btn-danger" type="reset">Reset</button>
+      </div>
+    </div>
+
+</form>
