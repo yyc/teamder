@@ -2,13 +2,13 @@
 module.exports = function(sequelize, DataTypes) {
   var Project = sequelize.define('Project', {
     isComplete: DataTypes.BOOLEAN,
-    owner: DataTypes.USER,
+    owner: DataTypes.INTEGER,
     name: DataTypes.STRING,
     description: DataTypes.TEXT
   }, {
     classMethods: {
       associate: function(models) {
-        // associations can be defined here
+        Project.belongsTo(models.User, {as: "owner"})
       }
     }
   });
