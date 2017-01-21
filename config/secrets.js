@@ -35,8 +35,8 @@ if(publicKey && privateKey){
 module.exports = {
   jwt: {
     algorithms,
-    publicKey,
-    privateKey
+    secretOrKey: publicKey,
+    secretOrPrivateKey: privateKey
   },
   url: process.env.URL || 'http://localhost:3000'
 }
