@@ -8,16 +8,29 @@ class Auth {
   constructor(db){
     // Requires db
     this.globals = globals;
-    this.jwt =
+    db.User.prototype.payload = function(){
+      return {
+        id: this.id,
+        projectId: this.projectId
+      }
+    }
   }
   strategy(){
     return new passportJwt.Strategy({
       ...secrets.jwt,
       jwtFromRequest: passportJwt.ExtractJwt.fromUrlQueryParameter("login")
+    }, function(payload, done){
+      User.findOne({id: payload.id})
+        .then(function(user){
+          done(null, user)
+        })
+        .error(function(error){
+          done(error);
+        })
     });
   }
-  encode(payload, options){
-    return jwt.sign(payload, secrets.jwt.privateKey,
+  jwtForUser(user){
+    return jwt.sign(user.payload(), secrets.jwt.privateKey,
     {...secrets.jwt,
     options});
   }
