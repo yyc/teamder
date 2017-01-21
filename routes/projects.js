@@ -73,7 +73,7 @@ module.exports = function(globals){
         // console.log
       })
       console.log("Project created");
-      globals.Auth.refreshCookie(res, inviter);
+      globals.auth.refreshCookie(res, inviter);
       res.json("OK");
   });
 

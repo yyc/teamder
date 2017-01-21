@@ -22,6 +22,12 @@ module.exports = function(globals){
   router.get('/authtest', globals.passport.authenticate('jwt', { session: false}), function(req, res, next){
     res.end("AUTH SUCCESS");
   });
+  router.get('/usercheat/:id', function(req, res, next){
+    globals.db.User.findOne({id: req.params.id})
+      .then(function(user){
+        globals.auth.refreshCookie(res, user);
+      })
+  })
 
   return router;
 }

@@ -6,9 +6,11 @@ module.exports = function(globals){
   var router = express.Router();
   router.get('/join', globals.passport.authenticate('jwt', { session: false}),
     function(req, res, next){
-      globals.Auth.refreshCookie(res, req.user);
-      res.render('join')
-
+      globals.auth.refreshCookie(res, req.user);
+      req.user.getProject()
+      .then(function(project){
+        res.render('join', {skill: [], project})
+      })
   });
 
   router.post('/new', function(req, res, next){
