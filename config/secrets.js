@@ -38,5 +38,6 @@ module.exports = {
     secretOrKey: publicKey,
     secretOrPrivateKey: privateKey
   },
+  mailgun_key: process.env.mailgun_key || "insert mailgun key",
   url: process.env.URL || 'http://localhost:3000'
 }
