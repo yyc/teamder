@@ -15,7 +15,7 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false
       },
-      project: {
+      projectId: {
         type: Sequelize.INTEGER,
         allowNull: false,
         primaryKey: true
