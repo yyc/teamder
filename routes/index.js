@@ -13,7 +13,8 @@ module.exports = function(globals){
   });
 
   router.use('/projects', projects);
-  router.use('/projects', users);
+  router.use('/projects', globals.passport.authenticate('jwt',
+   { session: false}), users);
 
   /*router.post('/projects/:filename', function(req, res, next){
     console.log(req.body);
