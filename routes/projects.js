@@ -63,13 +63,13 @@ module.exports = function(globals){
       // each user's token = globals.auth.jwtForUser(user)
       // Send inviter the email
       var subject = 'Project Allocation Session Created';
-      var inviterLink = globals.url + '/admin?login=' +  globals.auth.jwtForUser(inviter);
+      var inviterLink = globals.url + '/project/admin?login=' +  globals.auth.jwtForUser(inviter);
       var content = 'Hey there!\n\n Your project allocation session can be administered at ' + inviterLink + '\n\nCheers,\nThe Teamder Team';
       globals.Mail.sendMail(inviter.email, subject, content);
       // Send each invitee an email
       inviteeList.forEach(function(invitee){
         var token = globals.auth.jwtForUser(invitee);
-        var sendLink = globals.url + '/join?login=' + token;
+        var sendLink = globals.url + '/project/join?login=' + token;
         var subject = 'Invitation to Project Allocation Session';
         var content = 'Hey there!\n\nPlease proceed to ' + sendLink + 'in order to participate in the project allocation session.\n\nCheers,\nThe Teamder Team';
         globals.Mail.sendMail(invitee.email, subject, content);

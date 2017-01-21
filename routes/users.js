@@ -15,8 +15,9 @@ module.exports = function(globals){
   router.post('/join', function(req, res, next){
     var body = req.body
     req.user.update({
-      name: req.body.joinerName,
-      description: req.body.joinerAbout
+      name: req.body.joiner_name,
+      description: req.body.joiner_about,
+      proficiencies: JSON.Stringify(req.body.joiner_skills)
     })
     .then(function(){
       console.log("User updated");
