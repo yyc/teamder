@@ -1,20 +1,23 @@
 var express = require('express');
-var router = express.Router();
 
 module.exports = function(db){
-  router.get('new', function(req, res, next){
+  var router = express.Router();
+  router.get('/new', function(req, res, next){
     res.render('projects/new')
   });
-  router.post('new', function(req, res, next){
-    var body = req.params.body
-    db.transaction(function(transaction){
-      db.Project
+
+  router.post('/new', function(req, res, next){
+    var body = req.body
+    var invitees = req.body.inviteEmails
+    var inviteeList = invitees.split(/[,\n ]+/)
+    db.sequelize.transaction(function(transaction){
+      return db.Project
       .create({
         name: body.projectName,
         description: body.description,
         numMembers: body.teamSize,
-        owner: 0
-      })
+        ownerId: 0
+      }, {transaction})
       .then(function(project) {
           var promiseArray = []
           promiseArray.push(
@@ -23,15 +26,32 @@ module.exports = function(db){
               name: body.creatorPassword,
               project,
               isAdmin: true
-            })
+            }, {transaction})
             .then(function(user){
-              return project.setOwner(user)
+              return project.setOwner(user, {transaction})
             })
           );
-
+          promiseArray = promiseArray.concat(
+            inviteeList
+            // TODO: filter for valid emails
+            //.filter(validEmail)
+            .map(function(email){
+              return db.User.create({
+                email: email,
+                project,
+                isAdmin: false
+              }, {transaction})
+            })
+          )
+          return Promise
+            .all(promiseArray)
+            .then(Promise.resolve(project));
         })
     })
-    res.render('projects/created', {details: body.toJSON()})
+    .then(function(project){
+      console.log("Project created");
+      res.render('projects/created', {details: body.toJSON()});
+    })
   })
   return router
 }
