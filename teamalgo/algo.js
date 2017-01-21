@@ -95,5 +95,5 @@ function match(people, relations, group_limit) {
 		}
 	}
 	// Perform Kruskal's algorithm
-	kruskal(people.length, match_results, group_limit);
+	return kruskal(people.length, match_results, group_limit);
 }
