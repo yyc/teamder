@@ -58,3 +58,42 @@ a, a:active, a:hover, a:visited {
 .index-content-desc {
     text-align: justify !important;
 }
+
+/* Range */
+.range-slider {
+  width: $range-width;
+}
+
+.range-slider__range {
+  height: $range-track-height;
+  border-radius: 5px;
+  background: $range-track-color;
+  outline: none;
+  padding: 0;
+  margin: 0;
+}
+
+.range-slider__value {
+  display: inline-block;
+  position: relative;
+  width: 60px !default;
+  color: #fff !default;
+  line-height: 20px;
+  text-align: center;
+  border-radius: 3px;
+  background: #2c3e50 !default;
+  padding: 5px 10px;
+  margin-left: 8px;
+}
+
+.range-slider__value:after {
+  position: absolute;
+  top: 8px;
+  left: -7px;
+  width: 0;
+  height: 0;
+  border-top: 7px solid transparent;
+  border-right: 7px solid $range-label-color;
+  border-bottom: 7px solid transparent;
+  content: '';
+}

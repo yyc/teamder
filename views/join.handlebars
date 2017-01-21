@@ -33,8 +33,9 @@
 		  {{#each skill}}
 
 		  <label class="col-md-4 control-label" for="joinerSkill{{@index}}"> {{this}} </label>
-  		  <div class="col-md-8">
-  			<input id="joinerSkill{{@index}}" name="joinerSkill{{@index}}" type="text" placeholder="Rate yourself (1 - 10)" class="form-control input-md">
+  		  <div class="col-md-8 range-slider">
+  			  <input id="joinerSkill{{@index}}" name="joinerSkill{{@index}}" type="range" placeholder="Rate yourself (1 - 10)" min="1" max="10" step="1" value="5" class="form-control input-md range-slider__range">
+          <span class="range-slider__value">5</span>
   		  </div>
 
 		  {{/each}}

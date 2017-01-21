@@ -73,6 +73,27 @@ $(document).ready(function() {
         });
     });
 
+    var rangeSlider = function(){
+        var slider = $('.range-slider'),
+            range = $('.range-slider__range'),
+            value = $('.range-slider__value');
+    
+        slider.each(function(){
+
+          value.each(function(){
+            var el = $(this);
+            var value = el.prev().attr('value');
+            el.html(value);
+          });
+
+          range.on('input', function(){
+            $(this).next(value).html(this.value);
+          });
+        });
+    };
+
+    rangeSlider();
+
     $('#submitJoin').click(function(e){
         var joinerName = $('#joinerName').val();
         var joinerAbout = $('#joinerAbout').val();
