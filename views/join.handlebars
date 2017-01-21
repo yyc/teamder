@@ -10,11 +10,11 @@
 
   <h2 style='text-align:center;'> Project {{project.name}} Allocation </h2>
   <br/>
-  <!-- Joiner Name -->
+    <!-- Joiner Email -->
     <div class="form-group">
       <label class="col-md-4 control-label" for="email">Your email address:</label>
       <div class="col-md-4">
-        <input id="joinerEmail" type="text" class="form-control input-md" value="{{email}}" readonly="readonly">
+        <input type="text" class="form-control input-md" value="{{email}}" readonly="readonly">
       </div>
     </div>
 	<!-- Joiner Name -->
@@ -35,7 +35,7 @@
 
 	<!-- Skills of Interest -->
 	<div class="form-group">
-    {{#if skills}}
+    {{#if skill}}
   	  <label class="col-md-4 control-label" for="joinerSkills"> Skills of Interest: <br> (10 = most proficient) </label>
   	  <div class="col-md-4">
   		  <div class="form-group">

@@ -13,7 +13,7 @@ module.exports = function(globals){
   });
 
   router.post('/join', function(req, res, next){
-    var body = req.body
+    var body = req.body;
     req.user.update({
       name: req.body.joiner_name,
       description: req.body.joiner_about,
@@ -23,7 +23,9 @@ module.exports = function(globals){
       console.log("User updated");
       globals.auth.refreshCookie(res , req.user);
       res.json("OK");
-    })
+  }).error(function(msg) {
+      console.log(msg)
+  })
   });
 
   router.get('/admin', function(req, res, next){
