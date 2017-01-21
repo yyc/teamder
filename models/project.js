@@ -3,6 +3,7 @@ module.exports = function(sequelize, DataTypes) {
   var Project = sequelize.define('Project', {
     isComplete: DataTypes.BOOLEAN,
     owner: DataTypes.INTEGER,
+    numMembers: DataTypes.INTEGER,
     name: DataTypes.STRING,
     description: DataTypes.TEXT
   }, {
