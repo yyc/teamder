@@ -68,14 +68,15 @@ $(document).ready(function() {
         $.ajax({
             type: 'POST',
             url: '/projects/new',
-            data: {
+            contentType: 'application/json',
+            data: JSON.stringify({
                 'creator_name': creatorName,
                 'creator_email': creatorEmail,
                 'project_name': projectName,
                 'project_desc':projectDesc,
                 'team_size' : teamSize,
-                'emails' : emails
-            },
+                'email_list' : emails
+            }),
             success: function(msg) {
                 $('#create_error').css({'display' : 'none'});
             }

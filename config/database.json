@@ -1,6 +1,6 @@
 {
   "development": {
-    "username": "root",
+    "username": null,
     "password": null,
     "database": "teamder_development",
     "host": "127.0.0.1",

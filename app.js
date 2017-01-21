@@ -13,8 +13,7 @@ var db = require('./models')
 var globals = {db}
 var auth = new Auth(globals);
 globals.auth = auth;
-var mail = new Mail(globals);
-globals.mail = mail;
+globals.Mail = new Mail(globals);
 
 var routes = require('./routes/index')(globals);
 

@@ -10,9 +10,7 @@ module.exports = function(globals){
 
   router.post('/new', function(req, res, next){
     var body = req.body
-    var invitees = body.emails
-    console.log(body.emails)
-    var inviteeList = invitees.split(/[,\n ]+/)
+    var inviteeList = body.email_list
 
     db.sequelize.transaction(function(transaction){
       return db.Project
@@ -50,27 +48,27 @@ module.exports = function(globals){
           );
           return Promise
             .all(promiseArray)
-            .then(Promise.resolve([project, promiseArray[0], promiseArray.slice(1)]));
+            .then((results) => Promise.resolve([project, results[0], results.slice(1)]));
         })
     })
     .then(function(projAndUser){
       // If created
-      [project, inviter, invitees] = projAndUser
+      [project, inviter, inviteeList] = projAndUser
       // TODO: Send out emails to inviteeList and user(the inviter)
       // each user's token = globals.auth.jwtForUser(user)
-
       // Send inviter the email
       var subject = 'Project Allocation Session Created';
       var content = 'Hey there!\n\n, your project allocation session can be administered at [link]';
-      Mail.sendMail(inviter.email, subject, content);
+      globals.Mail.sendMail(inviter.email, subject, content);
       // Send each invitee an email
-      invitees.forEach(function(invitee){
-        var token = globals.auth.jwtForUser(user);
+      inviteeList.forEach(function(invitee){
+        console.log(invitee)
+        var token = globals.auth.jwtForUser(invitee);
         var sendLink = global.url + '/join?login=' + token;
         var subject = 'Invitation to Project Allocation Session';
         var content = 'Hey there!\n\nPlease proceed to ' + sendLink + 'in order to participate in the project allocation session.';
-        Mail.sendMail(invitee.email, subject, content);
-        console.log("Sent mail to: " + invite.email);
+        globals.Mail.sendMail(invitee.email, subject, content);
+        console.log("Sent mail to: " + invitee.email);
         // console.log
       })
       console.log("Project created");
