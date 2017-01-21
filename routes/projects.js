@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 
-function(db){
+module.exports = function(db){
   router.get('new', function(req, res, next){
     res.render('projects/new')
   });
@@ -33,5 +33,5 @@ function(db){
     })
     res.render('projects/created', {details: body.toJSON()})
   })
-
-  module.exports = router;
+  return router
+}
