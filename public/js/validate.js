@@ -18,7 +18,7 @@ $(document).ready(function() {
         var projectDesc = $('#projectDesc').val();
     	var teamSize = $('#teamSize').val();
     	var emails = $('#inviteEmails').val().split(",");
-        var skillList = $('#skillList').val().split(",");
+        var skillList = $('#skillList').val();
 
         // validate creator name
         if (!creatorName.trim()) {
