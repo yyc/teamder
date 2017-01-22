@@ -1,0 +1,40 @@
+<html>
+<body>
+<script src='algo.js'></script>
+<script>
+var seed_people = [
+{'id': 12, skill_list: [9, 8, 7, 6]},
+{'id': 34, skill_list: [8, 7, 6, 5]},
+{'id': 56, skill_list: [5, 6, 7, 8]},
+{'id': 78, skill_list: [6, 7, 8, 9]},
+{'id': 912, skill_list: [6, 6, 6, 6]}
+];
+
+  var seed_edge_list = [
+{source: 12, target: 34},
+{source: 12, target: 56},
+{source: 12, target: 78},
+{source: 12, target: 912},
+{source: 34, target: 56},
+{source: 34, target: 78},
+{source: 34, target: 912},
+{source: 56, target: 78},
+{source: 56, target: 912},
+{source: 78, target: 912},
+{source: 34, target: 12},
+{source: 56, target: 12},
+{source: 78, target: 12},
+{source: 912, target: 12},
+{source: 56, target: 34},
+{source: 78, target: 34},
+{source: 912, target: 34},
+{source: 78, target: 56},
+{source: 912, target: 56},
+{source: 912, target: 78}
+];
+
+
+  console.log(match(seed_people, seed_edge_list, 3));
+</script>
+</body>
+</html>

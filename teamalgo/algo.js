@@ -36,7 +36,7 @@ function kruskal(n, edge_list, group_limit) {
 	for (var i = 0; i < n; i++) {
 		rep[i] = i;
 		size[i] = 1;
-		valid = false;
+		valid[i] = false;
 	}
 
 	function find(k) {
@@ -46,7 +46,7 @@ function kruskal(n, edge_list, group_limit) {
 
 	function join_limit(a, b, k) {
 		valid[a] = true;
-		value[b] = true;
+		valid[b] = true;
 		var ra = find(a), rb = find(b);
 		if (ra == rb || size[ra] + size[rb] > k) return false;
 		if (size[ra] >= size[rb]) {
@@ -72,11 +72,11 @@ function kruskal(n, edge_list, group_limit) {
 	var teams = new Array();
 	var teams_count = 0;
 	for (var i = 0; i < n; i++) {
-		if (rep[i] != i) continue;
+		if (rep[i] != i || !valid[i]) continue;
 		teams[teams_count] = new Array();
 		var team_size = 0;
 		for (var j = 0; j < n; j++)
-			if (rep[j] == i)
+			if (rep[j] == i && valid[i])
 				teams[teams_count][team_size++] = j;
 		teams_count++;
 	}
@@ -87,10 +87,10 @@ function kruskal(n, edge_list, group_limit) {
 function match(people, relations, group_limit) {
 	// Convert relations to matrix
 	var maxid = -1;
-	for (int i = 0; i < people.length; i++) {
+	for (var i = 0; i < people.length; i++) {
 		maxid = maxid > people[i]["id"] ? maxid : people[i]["id"];
 	}
-	relation_matrix = convert_matrix(relations, maxid);
+	relation_matrix = convert_matrix(relations, maxid + 1);
 	match_results = new Array();
 	match_count = 0;
 	// Compute distance between 2 people (lower factor = like + more similar)
