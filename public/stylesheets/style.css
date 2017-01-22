@@ -1,3 +1,12 @@
+@font-face {font-family: "HipsterScriptW00-Regular";
+    src: url("//db.onlinewebfonts.com/t/e226d1a6a55ad0fb030ec9dec70a69b3.eot");
+    src: url("//db.onlinewebfonts.com/t/e226d1a6a55ad0fb030ec9dec70a69b3.eot?#iefix") format("embedded-opentype"),
+    url("//db.onlinewebfonts.com/t/e226d1a6a55ad0fb030ec9dec70a69b3.woff2") format("woff2"),
+    url("//db.onlinewebfonts.com/t/e226d1a6a55ad0fb030ec9dec70a69b3.woff") format("woff"),
+    url("//db.onlinewebfonts.com/t/e226d1a6a55ad0fb030ec9dec70a69b3.ttf") format("truetype"),
+    url("//db.onlinewebfonts.com/t/e226d1a6a55ad0fb030ec9dec70a69b3.svg#HipsterScriptW00-Regular") format("svg");
+}
+
 body {
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
   margin: 0px !important;
@@ -22,17 +31,21 @@ a, a:active, a:hover, a:visited {
 /* Navbar */
 .navcontainer {
     color: white;
-    background-color: #000;
+    background-color: #f9576e;
+    font-family: "HipsterScriptW00-Regular";
+    overflow-y: hidden;
 }
 
 .nav-title {
     padding: 5px 0px 0px 5px !important;
     font-weight: 900;
     font-size: 24px;
+    width: 100%;
+    text-align: center;
 }
 
 #navbar {
-    padding: 10px 20px 10px 5px;
+    padding: 10px 20px 0px 5px;
 }
 
 /* Main Content Index */
@@ -182,4 +195,8 @@ header {
 }
 .table-filter .media .summary {
     font-size: 14px;
+}
+
+.btn-special {
+  background-color: #ff0000;
 }
