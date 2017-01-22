@@ -1,3 +1,13 @@
+<script>
+    function indicate(id, isYes) {
+        if (isYes) {
+            $('matchPersonIndicator' + id).css({'background-color':'#FF0000'});
+        } else {
+            $('matchPersonIndicator' + id).css({'background-color':'#0000FF'});
+        }
+    }
+</script>
+
 <div class='container-fluid'>
     <div class='row'>
         <div id='create_error' class='col-md-4 col-md-offset-4'></div>
@@ -9,8 +19,8 @@
 <form class='form-horizontal'>
 	<div class='container-fluid' id='match-container'>
     <h3 style='text-align:center;'> Candidates for {{ project.name }} </h3>
-    <hr/>
-    <div class='row'>
+    <br><br>
+    <!-- <div class='row'>
         <div class='col-md-2 col-md-offset-1'>
             <b> Name </b>
         </div>
@@ -35,7 +45,39 @@
 				</div>
 			</div>
             <hr/>
-	{{/each}}
+	{{/each}}-->
+
+    <div class='row'>
+        {{#each people}}
+            <div class='col-md-2 match-card'>
+                <b> {{ this.name }} </b>
+                <hr>
+                <p style='text-align:justifiy;'> {{ this.about }} </p>
+                <div class="btn-group" data-toggle="buttons">
+                  <label class="btn btn-danger">
+                    <input name="matchPersonVote{{this.id}}" type="radio" autocomplete="off" value='Off'> Nope
+                  </label>
+                  <label class="btn btn-success">
+                    <input id="matchPersonVote{{this.id}}" name="matchPersonVote{{this.id}}" type="radio" autocomplete="off" value="{{this.id}}"> Yes!
+                  </label>
+                </div>
+            </div>
+        {{/each}}
+        <div class='col-md-2 match-card'>
+            <b> Test Name </b>
+            <hr>
+            <p style='text-align:justifiy;'> Test Descrption Test Description Test Description </p>
+            <div class="btn-group" data-toggle="buttons">
+              <label class="btn btn-danger">
+                <input  name="matchPersonVote0" type="radio" autocomplete="off" value='Off'> Nope
+              </label>
+              <label class="btn btn-success">
+                <input id="matchPersonVote0" name="matchPersonVote0" type="radio" autocomplete="off" value='0'> Yes!
+              </label>
+            </div>
+        </div>
+    </div>
+
 
 		<input id="matchNumPersons" name="matchNumPersons" type="hidden" class="form-control input-md" value='{{people.length}}'/>
 		<!-- Button -->
@@ -47,5 +89,6 @@
 			<button class="btn btn-danger" type="reset">Reset</button>
 		  </div>
 		</div>
+
 	</div>
 </form>

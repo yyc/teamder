@@ -173,10 +173,10 @@ $(document).ready(function() {
         var matchedPeopleIndex = new Array();
         var matchedCount = 0;
         $('#match-container input:checked').each(function() {
-           matchedPeopleIndex[matchedCount++] = this.value;
+           if (this.value != 'Off') {
+              matchedPeopleIndex[matchedCount++] = this.value;
+           }
        });
-
-       // do we need to put a restriction on number of people?
 
        // Send AJAX request to join
        $.ajax({
