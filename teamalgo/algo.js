@@ -32,9 +32,11 @@ function kruskal(n, edge_list, group_limit) {
 	// Kruskal's implementation
 	var rep = new Array(n);
 	var size = new Array(n);
+	var valid = new Array(n);
 	for (var i = 0; i < n; i++) {
 		rep[i] = i;
 		size[i] = 1;
+		valid = false;
 	}
 
 	function find(k) {
@@ -43,6 +45,8 @@ function kruskal(n, edge_list, group_limit) {
 	}
 
 	function join_limit(a, b, k) {
+		valid[a] = true;
+		value[b] = true;
 		var ra = find(a), rb = find(b);
 		if (ra == rb || size[ra] + size[rb] > k) return false;
 		if (size[ra] >= size[rb]) {
@@ -82,16 +86,20 @@ function kruskal(n, edge_list, group_limit) {
 // Matching Routine
 function match(people, relations, group_limit) {
 	// Convert relations to matrix
-	relation_matrix = convert_matrix(relations, people.length);
+	var maxid = -1;
+	for (int i = 0; i < people.length; i++) {
+		maxid = maxid > people[i]["id"] ? maxid : people[i]["id"];
+	}
+	relation_matrix = convert_matrix(relations, maxid);
 	match_results = new Array();
 	match_count = 0;
 	// Compute distance between 2 people (lower factor = like + more similar)
 	for (var i = 0; i < people.length; i++) {
 		for (var j = i + 1; j < people.length; j++) {
 			var ij_distance = euclid_nd(people[i]['skill_list'], people[j]['skill_list'], relation_matrix[i][j] + relation_matrix[j][i]);
-			match_results[match_count++] = {'a_id': i,'b_id': j, 'distance': ij_distance };
+			match_results[match_count++] = {'a_id': people[i]["id"],'b_id': people[j]["id"], 'distance': ij_distance };
 		}
 	}
 	// Perform Kruskal's algorithm
-	return kruskal(people.length, match_results, group_limit);
+	return kruskal(maxid + 1, match_results, group_limit);
 }
