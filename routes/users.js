@@ -51,7 +51,8 @@ module.exports = function(globals){
           project.getUsers({
             where: {
               name: { $ne: null },
-              isAdmin: { $eq: false }
+              isAdmin: false,
+              id: {$ne: req.user.id}
             }
           }),
           req.user.getEdges()
