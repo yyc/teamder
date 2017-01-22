@@ -93,6 +93,21 @@ module.exports = function(globals){
     })
     .then(function(){
       res.json("Your preferences have been recorded.");
+      return globals.db.User.count(
+        {where: {
+          projectId: req.user.projectId,
+          name: {
+            $eq: null
+          }
+        }
+      })
+    })
+    .then(function(count){ // If all users were already visible
+      req.user.setDataValue('isCompleted',true);
+      return req.user.save();
+    })
+    .then(function(user){
+      console.log(`User #${user.id} ${user.name} marked as completed`);
     })
   });
 
