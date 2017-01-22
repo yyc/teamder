@@ -61,8 +61,12 @@ header {
 }
 
 .index-content-title {
-    font-family: "Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-family: "Montserrsat", "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-size: 60px;
+}
+
+.index-content-subsubtitle {
+    font-size: 9px;
 }
 
 .index-content-subtitle {
