@@ -182,7 +182,7 @@ $(document).ready(function() {
        $.ajax({
            type: 'POST',
            url: '/match',
-           contentType: 'application/json'
+           contentType: 'application/json',
            data: JSON.stringify({
                'matched_people_index':matchedPeopleIndex
            }),
