@@ -23,7 +23,7 @@ module.exports = function(globals){
       var users = project.Users.map(function(user){
         return {
           id: user.id,
-          skill_list: user.proficiencies ? JSON.parse(user.proficiencies), []
+          skill_list: user.proficiencies ? JSON.parse(user.proficiencies): []
         }
       })
       var edges = edges.map(function(edge){
@@ -33,6 +33,7 @@ module.exports = function(globals){
         }
       })
       var results = match(users, edges, project.numMembers)
+      res.render(test.ha)
     });
   });
 
