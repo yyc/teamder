@@ -162,7 +162,7 @@ $(document).ready(function() {
                 $('#create_error').css({'display' : 'none'});
             }
         }).done(function(data) {
-            window.location.href = '/';
+            window.location.href = '/projects/match';
         });
 
         $('#create_error').css({'display' : 'none'});
@@ -173,10 +173,10 @@ $(document).ready(function() {
         var matchedPeopleIndex = new Array();
         var matchedCount = 0;
         $('#match-container input:checked').each(function() {
-           matchedPeopleIndex[matchedCount++] = this.value;
+           if (this.value != 'Off') {
+              matchedPeopleIndex[matchedCount++] = this.value;
+           }
        });
-
-       // do we need to put a restriction on number of people?
 
        // Send AJAX request to join
        $.ajax({
