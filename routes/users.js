@@ -42,11 +42,23 @@ module.exports = function(globals){
 
   router.get('/match', function(req, res, next){
     if(req.user.isAdmin){
-      res.render("error", {error: "Overauthorized"});
+      console.log("Overauthorized");
+      res.redirect('/project/admin');
     } else{
       req.user.getProject()
       .then(function(project){
-        res.render('match', {project});
+        project.getUsers({
+          where: {
+            name: {
+              $ne: null
+            },
+            isAdmin: {
+              $ne: true
+            }
+          }
+        }).then(function(users){
+          res.render('match', {project, people: users});
+        })
       })
     }
   });

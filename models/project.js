@@ -10,7 +10,8 @@ module.exports = function(sequelize, DataTypes) {
   }, {
     classMethods: {
       associate: function(models) {
-        Project.belongsTo(models.User, {as: "owner"})
+        Project.belongsTo(models.User, {as: "owner"});
+        Project.hasMany(models.User, {foreignKey: 'projectId'});
       }
     }
   });
