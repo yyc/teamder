@@ -20,10 +20,13 @@ module.exports = function(globals){
     ])
     .then(function(projectEdges){
       [project, edges] = projectEdges;
+      var usernames = {};
       var users = project.Users.map(function(user){
+        usernames[user.id] = user.name;
         return {
           id: user.id,
-          skill_list: user.proficiencies && user.proficiencies != '[]' ? JSON.parse(user.proficiencies): [Math.ceil(Math.random()*9),Math.ceil(Math.random()*9),Math.ceil(Math.random()*9)]
+          skill_list: user.proficiencies && user.proficiencies != '[]' ? JSON.parse(user.proficiencies): [Math.ceil(Math.random()*9),Math.ceil(Math.random()*9),Math.ceil(Math.random()*9)],
+          name: user.name
         }
       })
       var edges = edges.map(function(edge){
@@ -32,10 +35,13 @@ module.exports = function(globals){
           target: edge.targetId
         }
       })
-      console.log(users);
-      console.log(edges);
       var results = match(users, edges, project.numMembers)
-      res.render(test.ha)
+      var resultsParsed = results.map(function(ary){
+        return ary.map(function(val){
+          return usernames[val];
+        });
+      });
+      res.render("test", {teams:resultsParsed, usernames});
     });
   });
 
