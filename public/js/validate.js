@@ -181,7 +181,7 @@ $(document).ready(function() {
        // Send AJAX request to join
        $.ajax({
            type: 'POST',
-           url: '/match',
+           url: '/projects/match',
            contentType: 'application/json',
            data: JSON.stringify({
                'matched_people_index':matchedPeopleIndex

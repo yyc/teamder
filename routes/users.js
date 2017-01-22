@@ -76,7 +76,24 @@ module.exports = function(globals){
   });
 
   router.post('/match', function(req, res, next){
-
+    var matches = req.body.matched_people_index.map(parseInt);
+    globals.db.User.findAll({where: {id: matches}})
+    .then(function(users){
+      return globals.db.UserEdges.destroy({where: {sourceId: req.user.id}})
+      .then(function(count){
+        return globals.db.UserEdges.bulkCreate(
+          users.map(function(user){
+            return {
+              sourceId: req.user.id,
+              targetId: user.id
+            }
+          })
+        )
+      })
+    })
+    .then(function(){
+      res.json("Your preferences have been recorded.");
+    })
   });
 
   return router
