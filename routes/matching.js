@@ -10,10 +10,10 @@ module.exports = function(globals){
       req.user.getProject({
         include: [globals.db.User]
       }),
-      globals.db.userEdge.findAll({
+      globals.db.UserEdge.findAll({
         include: [{
           model: globals.db.User,
-          as: 'User',
+          as: 'source',
           where: { projectId: req.user.projectId }
         }]
       })
@@ -23,7 +23,7 @@ module.exports = function(globals){
       var users = project.Users.map(function(user){
         return {
           id: user.id,
-          skill_list: user.proficiencies ? JSON.parse(user.proficiencies): []
+          skill_list: user.proficiencies && user.proficiencies != '[]' ? JSON.parse(user.proficiencies): [Math.ceil(Math.random()*9),Math.ceil(Math.random()*9),Math.ceil(Math.random()*9)]
         }
       })
       var edges = edges.map(function(edge){
@@ -32,6 +32,8 @@ module.exports = function(globals){
           target: edge.targetId
         }
       })
+      console.log(users);
+      console.log(edges);
       var results = match(users, edges, project.numMembers)
       res.render(test.ha)
     });

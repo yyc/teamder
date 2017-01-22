@@ -14,6 +14,7 @@ module.exports = function(sequelize, DataTypes) {
         this.belongsTo(models.Project, {foreignKey: 'projectId'})
         this.belongsToMany(models.User, {as: 'Edges', through: 'UserEdges',
           foreignKey: 'sourceId', otherKey: 'targetId'});
+        this.hasMany(models.UserEdge, {as: 'Matches', foreignKey: 'sourceId'})
       }
     },
     instanceMethods: {

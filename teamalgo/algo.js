@@ -17,14 +17,15 @@ function convert_matrix(edge_list, n) {
 	var arr = new Array(n);
 	for (var i = 0; i < n; i++) {
 		arr[i] = new Array(n);
-		for (var j = 0; j < n; j++)
+		for (var j = 0; j < n; j++){
 			arr[i][j] = 0;
+		}
 	}
 
 	// Populate 2D Matrix
-	for (i = 0; i < edge_list.length; i++)
+	for (i = 0; i < edge_list.length; i++){
 		arr[edge_list[i]['source']][edge_list[i]['target']] = 1;
-
+	}
 	return arr;
 }
 
