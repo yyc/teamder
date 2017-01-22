@@ -8,22 +8,37 @@
 
 <form class='form-horizontal'>
 	<div class='container-fluid' id='match-container'>
+    <hr/>
+    <div class='row'>
+        <div class='col-md-2 col-md-offset-1'>
+            <b> Name </b>
+        </div>
+        <div class='col-md-6'>
+            <b> Individual Description </b>
+        </div>
+        <div class='col-md-2'>
+            <b> Preferred </b>
+        </div>
+    </div>
+    <hr/>
 	{{#each people}}
 			<div class='row'>
 				<div class='col-md-2 col-md-offset-1' id='matchPersonName{{this.id}}'>
-					<b> {{this.name}} </b>
+					{{this.name}}
 				</div>
 				<div class='col-md-6' id='matchPersonAbout{{this.id}}'>
 					{{this.about}}
 				</div>
 				<div class='col-md-2'>
-					<input id="matchPersonVote{{this.id}}" name="matchPersonVote{{this.id}}" type="checkbox" class="form-control input-md" value='{{this.id}}'/> Preferred
+					<input id="matchPersonVote{{this.id}}" name="matchPersonVote{{this.id}}" type="checkbox" class="form-control input-md" value='{{this.id}}' data-toggle="toggle"/>
 				</div>
 			</div>
+            <hr/>
 	{{/each}}
 
 		<input id="matchNumPersons" name="matchNumPersons" type="hidden" class="form-control input-md" value='{{people.length}}'/>
 		<!-- Button -->
+        <br/><br/>
 		<div class="form-group">
 		  <label class="col-md-4 control-label" for="submitMatch"></label>
 		  <div class="col-md-4">
