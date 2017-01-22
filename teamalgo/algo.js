@@ -95,3 +95,4 @@ function match(people, relations, group_limit) {
 	// Perform Kruskal's algorithm
 	return kruskal(people.length, match_results, group_limit);
 }
+module.exports = match;
