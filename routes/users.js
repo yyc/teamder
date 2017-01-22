@@ -34,8 +34,11 @@ module.exports = function(globals){
         include: [globals.db.User]
       })
       .then(function(project){
+        var users = project.Users.filter((user) => !user.isAdmin);
+        var isAllCompleted = users.reduce((total, user) => total && user.isCompleted , true);
         res.render('admin', {project,
-          users: project.Users.filter((user) => !user.isAdmin)
+          users,
+          isAllCompleted
         })
       });
     } else{
