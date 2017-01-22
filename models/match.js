@@ -1,6 +1,6 @@
 'use strict';
 module.exports = function(sequelize, DataTypes) {
-  var Match = sequelize.define('Match', {
+  var Match = sequelize.define('UserEdges', {
     sourceId: DataTypes.INTEGER,
     targetId: DataTypes.INTEGER,
     value: DataTypes.INTEGER

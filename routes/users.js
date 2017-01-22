@@ -47,21 +47,37 @@ module.exports = function(globals){
     } else{
       req.user.getProject()
       .then(function(project){
-        project.getUsers({
-          where: {
-            name: {
-              $ne: null
-            },
-            isAdmin: {
-              $ne: true
+        Promise.all([
+          project.getUsers({
+            where: {
+              name: { $ne: null },
+              isAdmin: { $eq: false }
             }
-          }
-        }).then(function(users){
+          }),
+          req.user.getEdges()
+        ])
+         .then(function(usersEdges){
+           [users, edges] = usersEdges
+           for(var i = 0; i < users.length; i++){
+             for(var j = 0; j < edges.length; j++){
+               if(users[i].id = edges[j].id){
+                 if(edges[j].weight != 0){
+                   console.log(`Checked ${users[i].id}`);
+                   users[i].checkedValue = "checked";
+                 }
+                 break;
+               }
+             }
+           }
           res.render('match', {project, people: users});
         })
       })
     }
   });
-  //TODO: match POST
+
+  router.post('/match', function(req, res, next){
+
+  });
+
   return router
 }
