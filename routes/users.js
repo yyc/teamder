@@ -30,9 +30,13 @@ module.exports = function(globals){
 
   router.get('/admin', function(req, res, next){
     if(req.user.isAdmin){
-      req.user.getProject()
+      req.user.getProject({
+        include: [globals.db.User]
+      })
       .then(function(project){
-        res.render('admin', {project})
+        res.render('admin', {project,
+          users: project.Users.filter((user) => !user.isAdmin)
+        })
       });
     } else{
       res.status(401);
