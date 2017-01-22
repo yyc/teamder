@@ -92,7 +92,7 @@ $(document).ready(function() {
             }
         }).done(function(data) {
             alert('An email has been sent you and all invitees will receive an invitation as well. Please check your email for further details.');
-            window.location.href = '/';
+            window.location.href = '/projects/admin';
         });
     });
 
