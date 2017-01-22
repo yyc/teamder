@@ -37,19 +37,18 @@ a, a:active, a:hover, a:visited {
 
 /* Main Content Index */
 header {
-    /*background-image: url('../img/team-min.jpg');*/
+    /*background-image: url('../img/team-min.jpg');
     background-repeat: repeat-x;
     background-attachment: scroll;
     background-position: center center;
-    background-size: contain;
+    background-size: contain;*/
     text-align: center;
-    opacity: 0.5;
+    opacity: 0.6;
 }
 
 .index-content {
     margin-top: 50px;
     margin-bottom: 50px;
-    padding-top: 15%;
     text-align: center;
     color: black;
     font-weight: 700;
