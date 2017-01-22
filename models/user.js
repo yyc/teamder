@@ -12,6 +12,8 @@ module.exports = function(sequelize, DataTypes) {
     classMethods: {
       associate: function(models) {
         this.belongsTo(models.Project, {foreignKey: 'projectId'})
+        this.belongsToMany(models.User, {through: 'Match', as: 'Edges',
+          foreignKey: 'sourceId', otherKey: 'destinationId'});
       }
     },
     instanceMethods: {
