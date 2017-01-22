@@ -170,10 +170,10 @@ $(document).ready(function() {
 
     $('#submitMatch').click(function(e){
         var matchNumPersons = $('#matchNumPersons').val();
-        var matchedPeople = new Array();
+        var matchedPeopleIndex = new Array();
         var matchedCount = 0;
         $('#match-container input:checked').each(function() {
-           matchedPeople[matchedCount++] = this.value;
+           matchedPeopleIndex[matchedCount++] = this.value;
        });
 
        // do we need to put a restriction on number of people?
@@ -182,9 +182,10 @@ $(document).ready(function() {
        $.ajax({
            type: 'POST',
            url: '/match',
-           data: {
-               'matched_people':matchedPeople
-           },
+           contentType: 'application/json',
+           data: JSON.stringify({
+               'matched_people_index':matchedPeopleIndex
+           }),
            success: function(msg) {
                $('#create_error').css({'display' : 'none'});
            }
