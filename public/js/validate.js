@@ -162,7 +162,7 @@ $(document).ready(function() {
                 $('#create_error').css({'display' : 'none'});
             }
         }).done(function(data) {
-            window.location.href = '/';
+            window.location.href = '/projects/match';
         });
 
         $('#create_error').css({'display' : 'none'});
