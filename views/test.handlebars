@@ -1,10 +1,18 @@
-<table>
-	{{#each teams}}
-		<tr>
-		<td>{{@index}}</td>
-		{{#each this}}
-			<td>{{this}}</td>
-		{{/each}}
-		</tr>
-	{{/each}}
-</table>
+<h3 style='text-align:center;'> Team Allocation Results </h3>
+
+<div class='container'>
+	<div class='row'>
+		<div class='col-md-4 col-md-offset-4'>
+			<table>
+				{{#each teams}}
+					<tr>
+					<td> Team {{@index}}</td>
+					{{#each this}}
+						<td>&nbsp; (Member {{@index}} - {{this}}) &nbsp;</td>
+					{{/each}}
+					</tr>
+				{{/each}}
+			</table>
+		<div>
+	</div>
+</div>
